@@ -24,6 +24,21 @@ import (
 	"k8s.io/apimachinery/pkg/util/intstr"
 )
 
+// MachineHealthCheck's RemediationAllowed condition and corresponding reasons that will be used in v1Beta2 API version.
+const (
+	// MachineHealthCheckRemediationAllowedV1Beta2Condition surfaces whether the MachineHealthCheck is
+	// allowed to remediate any Machines or whether it is blocked from remediating any further.
+	MachineHealthCheckRemediationAllowedV1Beta2Condition = "RemediationAllowed"
+
+	// MachineHealthCheckTooManyUnhealthyV1Beta2Reason is the reason used when too many Machines are unhealthy and
+	// the MachineHealthCheck is blocked from making any further remediation.
+	MachineHealthCheckTooManyUnhealthyV1Beta2Reason = "TooManyUnhealthy"
+
+	// MachineHealthCheckRemediationAllowedV1Beta2Reason is the reason used when the number of unhealthy machine
+	// is within the limits defined by the MachineHealthCheck, and thus remediation is allowed.
+	MachineHealthCheckRemediationAllowedV1Beta2Reason = "RemediationAllowed"
+)
+
 var (
 	// DefaultNodeStartupTimeout is the time allowed for a node to start up.
 	// Can be made longer as part of spec if required for particular provider.

@@ -112,6 +112,30 @@ const (
 
 	// PausedV1Beta2Reason surfaces when an object is paused.
 	PausedV1Beta2Reason = "Paused"
+
+	// RemoteConnectionFailedV1Beta2Reason surfaces that the remote connection failed.
+	// This is typically used when setting remote conditions (e.g. `NodeHealthy`) to `Unknown`
+	// after the remote connection probe didn't succeed for remote conditions grace period.
+	RemoteConnectionFailedV1Beta2Reason = "RemoteConnectionFailed"
+
+	// RemoteConnectionDownV1Beta2Reason surfaces that the remote connection is down.
+	// This is typically used when setting remote conditions (e.g. `NodeHealthy`) to `Unknown`
+	// when the connection is down and they haven't been set yet.
+	RemoteConnectionDownV1Beta2Reason = "RemoteConnectionDown"
+
+	// DeletionTimestampNotSetV1Beta2Reason surfaces when an object is not deleting because the
+	// DeletionTimestamp is not set.
+	DeletionTimestampNotSetV1Beta2Reason = "DeletionTimestampNotSet"
+
+	// DeletionTimestampSetV1Beta2Reason surfaces when an object is deleting because the
+	// DeletionTimestamp is set. This reason is used if none of the more specific reasons apply.
+	DeletionTimestampSetV1Beta2Reason = "DeletionTimestampSet"
+
+	// DeletionCompletedV1Beta2Reason surfaces when the deletion process has been completed.
+	// This reason is set right after the corresponding finalizer is removed.
+	// This means that the object will go away (i.e. be removed from etcd), except if there are other
+	// finalizers on the object.
+	DeletionCompletedV1Beta2Reason = "DeletionCompleted"
 )
 
 // Conditions that will be used for the MachineSet object in v1Beta2 API version.
@@ -133,9 +157,6 @@ const (
 
 	// MachineSetDeletingV1Beta2Condition surfaces details about ongoing deletion of the controlled machines.
 	MachineSetDeletingV1Beta2Condition = DeletingV1Beta2Condition
-
-	// MachineSetPausedV1Beta2Condition is true if this MachineSet or the Cluster it belongs to are paused.
-	MachineSetPausedV1Beta2Condition = PausedV1Beta2Condition
 )
 
 // Conditions that will be used for the MachineDeployment object in v1Beta2 API version.
@@ -162,9 +183,6 @@ const (
 
 	// MachineDeploymentDeletingV1Beta2Condition surfaces details about ongoing deletion of the controlled machines.
 	MachineDeploymentDeletingV1Beta2Condition = DeletingV1Beta2Condition
-
-	// MachineDeploymentPausedV1Beta2Condition is true if this MachineDeployment or the Cluster it belongs to are paused.
-	MachineDeploymentPausedV1Beta2Condition = PausedV1Beta2Condition
 )
 
 // Conditions that will be used for the Cluster object in v1Beta2 API version.
@@ -220,19 +238,6 @@ const (
 
 	// ClusterDeletingV1Beta2Condition surfaces details about ongoing deletion of the cluster.
 	ClusterDeletingV1Beta2Condition = DeletingV1Beta2Condition
-
-	// ClusterPausedV1Beta2Condition is true if Cluster and all the resources being part of it are paused.
-	ClusterPausedV1Beta2Condition = PausedV1Beta2Condition
-)
-
-// Conditions that will be used for the MachineHealthCheck object in v1Beta2 API version.
-const (
-	// MachineHealthCheckRemediationAllowedV1Beta2Condition surfaces whether the MachineHealthCheck is
-	// allowed to remediate any Machines or whether it is blocked from remediating any further.
-	MachineHealthCheckRemediationAllowedV1Beta2Condition = "RemediationAllowed"
-
-	// MachineHealthCheckPausedV1Beta2Condition is true if this MachineHealthCheck or the Cluster it belongs to are paused.
-	MachineHealthCheckPausedV1Beta2Condition = PausedV1Beta2Condition
 )
 
 // Conditions that will be used for the ClusterClass object in v1Beta2 API version.
@@ -246,7 +251,4 @@ const (
 	// up-to-date (i.e. they are using the latest apiVersion of the current Cluster API contract from
 	// the corresponding CRD).
 	ClusterClassRefVersionsUpToDateV1Beta2Condition = "RefVersionsUpToDate"
-
-	// ClusterClassPausedV1Beta2Condition is true if this ClusterClass is paused.
-	ClusterClassPausedV1Beta2Condition = PausedV1Beta2Condition
 )
